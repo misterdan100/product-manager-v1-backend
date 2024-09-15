@@ -39,3 +39,41 @@ export const createProduct = async (req: Request, res: Response) => {
         console.log('[CREATEPRODUCT]', error)
     }
 }
+
+export const updateProduct = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id
+        const product = await Product.findByPk(id)
+        if(!product) { // Validate if product exist
+            return res.status(404).json({
+                error: 'Product not found!'
+            })
+        }
+
+        await product.update(req.body)
+        const response = await product.save()
+        res.status(200).json({data: response})
+
+    } catch (error) {
+        console.log('[UPDATEPRODUCT]', error)
+    }
+}
+
+export const updateAvailability = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id
+        const product = await Product.findByPk(id)
+        if(!product) { // Validate if product exist
+            return res.status(404).json({
+                error: 'Product not found!'
+            })
+        }
+
+        product.availability = !product.dataValues.availability
+        const response = await product.save()
+        res.status(200).json({data: response})
+
+    } catch (error) {
+        console.log('[UPDATEAVAILABILITY]', error)
+    }
+}
