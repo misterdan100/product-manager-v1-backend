@@ -19,6 +19,9 @@ connectDB()
 // create express instance
 const server = express()
 
+// Reac form data
+server.use(express.json())
+
 server.use('/api/products', router)
 
 export default server
