@@ -34,7 +34,7 @@ export const getProductById = async ( req: Request, res: Response) => {
 export const createProduct = async (req: Request, res: Response) => {
     try {
         const product = await Product.create(req.body)
-        res.json({data: product, message: 'Product created correctly!'})
+        res.status(201).json({data: product, message: 'Product created correctly!'})
     } catch (error) {
         console.log('[CREATEPRODUCT]', error)
     }
@@ -75,5 +75,23 @@ export const updateAvailability = async (req: Request, res: Response) => {
 
     } catch (error) {
         console.log('[UPDATEAVAILABILITY]', error)
+    }
+}
+
+export const deleteProduct = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id
+        const product = await Product.findByPk(id)
+        if(!product) {
+            return res.status(404).json({
+                error: 'Product not found!'
+            })
+        }
+        const response = await product.destroy()
+        res.json({data: 'Product deleted.'})
+
+        
+    } catch (error) {
+        console.log('[DELETEPRODUCT]', error)
     }
 }

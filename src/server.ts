@@ -8,9 +8,9 @@ async function connectDB() {
     try {
         await db.authenticate()
         db.sync()
-        console.log(colors.cyan('Successfull conextion to db'))
+        // console.log(colors.cyan('Successfull conextion to db'))
     } catch (error) {
-        console.log(colors.bgRed.white('[CONNECTDB]'), error)
+        // console.log(colors.bgRed.white('[CONNECTDB]'), error)
     }
 }
 
@@ -23,5 +23,9 @@ const server = express()
 server.use(express.json())
 
 server.use('/api/products', router)
+
+server.get('/api', (req, res) => {
+    res.json({msg: 'From API'})
+})
 
 export default server
