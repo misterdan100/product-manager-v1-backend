@@ -4,13 +4,14 @@ import router from "./router";
 import colors from 'colors'
 
 // Connect to db
-async function connectDB() {
+export async function connectDB() {
     try {
         await db.authenticate()
         db.sync()
         // console.log(colors.cyan('Successfull conextion to db'))
     } catch (error) {
         // console.log(colors.bgRed.white('[CONNECTDB]'), error)
+        console.log(colors.bgRed.white('[CONNECTDB]'))
     }
 }
 
