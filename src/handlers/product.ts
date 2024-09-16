@@ -21,7 +21,7 @@ export const getProductById = async ( req: Request, res: Response) => {
         const product = await Product.findByPk(id)
         if(!product) {
             return res.status(404).json({
-                error: 'Product not found!'
+                errors: 'Product not found!'
             })
         }
         res.json({data: product})
@@ -46,7 +46,7 @@ export const updateProduct = async (req: Request, res: Response) => {
         const product = await Product.findByPk(id)
         if(!product) { // Validate if product exist
             return res.status(404).json({
-                error: 'Product not found!'
+                errors: 'Product not found!'
             })
         }
 
@@ -65,7 +65,7 @@ export const updateAvailability = async (req: Request, res: Response) => {
         const product = await Product.findByPk(id)
         if(!product) { // Validate if product exist
             return res.status(404).json({
-                error: 'Product not found!'
+                errors: 'Product not found!'
             })
         }
 
@@ -84,7 +84,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
         const product = await Product.findByPk(id)
         if(!product) {
             return res.status(404).json({
-                error: 'Product not found!'
+                errors: 'Product not found!'
             })
         }
         const response = await product.destroy()
