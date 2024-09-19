@@ -5,6 +5,7 @@ import colors from 'colors'
 import swaggerUI from 'swagger-ui-express'
 import swaggerSpec, { swaggerUiOptions } from "./config/swagger";
 import cors, { CorsOptions } from "cors";
+import morgan from 'morgan'
 
 
 
@@ -29,9 +30,11 @@ const server = express()
 const allowedOrigins = [process.env.FRONTEND_URL]
 const corsOptions: CorsOptions = {
     origin: function(origin, callback) {
+        console.log(origin)
         if(allowedOrigins.includes(origin)) {
             return callback(null, true)
         } else {
+            // return callback(null, true)
             return callback(new Error('CORS policy violation'), false)
         }
     }
@@ -41,6 +44,8 @@ server.use(cors(corsOptions))
 
 // Reac form data
 server.use(express.json())
+
+server.use(morgan('dev'))
 
 server.use('/api/products', router)
 

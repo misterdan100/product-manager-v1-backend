@@ -7,7 +7,7 @@ export const getProducts = async ( req: Request, res: Response) => {
             order: [
                 ['price', 'DESC']
             ],
-            attributes: {exclude: ['id']}
+            // attributes: {exclude: ['id']}
         })
         res.json({data: products})
     } catch (error) {
