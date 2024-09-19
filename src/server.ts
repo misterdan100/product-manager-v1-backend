@@ -35,7 +35,7 @@ const corsOptions: CorsOptions = {
             return callback(null, true)
         } else {
             // return callback(null, true)
-            return callback(new Error('CORS policy violation'), false)
+            return callback(new Error('CORS policy violation'))
         }
     }
 }
